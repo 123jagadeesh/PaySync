@@ -8,7 +8,7 @@ import 'package:paysync/src/constants/text_strings.dart';
 import 'package:paysync/src/features/authentication/controllers/splash_screen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
-    SplashScreen ({Key? key}): super(key: key);
+    SplashScreen ({super.key});
   
     final splashController = Get.put(SplashScreenController());
     @override

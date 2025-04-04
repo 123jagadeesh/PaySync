@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/material.dart'; // Add this import
 
 class AuthController extends GetxController {
   static AuthController get instance => Get.find();
@@ -15,50 +16,50 @@ class AuthController extends GetxController {
     try {
       isLoading.value = true;
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      
       Get.snackbar(
         'Success', 
         'Login successful!',
-        snackPosition: SnackPosition.BOTTOM,
-        duration: const Duration(seconds: 2),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green.withOpacity(0.1),  // Fixed: colors -> Colors
+        colorText: Colors.green,  // Fixed: colors -> Colors
+        duration: const Duration(seconds: 3),
       );
-      
-      await Future.delayed(const Duration(seconds: 2));
-      Get.offAllNamed('/home');
+      await Future.delayed(const Duration(seconds: 1));
+      Get.offAllNamed('/dashboard');
     } catch (e) {
       Get.snackbar(
         'Error', 
         e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-        duration: const Duration(seconds: 3),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red.withOpacity(0.1),
+        colorText: Colors.red,
       );
     } finally {
       isLoading.value = false;
     }
   }
 
-  // Email & Password Sign Up
-  Future<void> signUpWithEmail(String email, String password, String fullName) async {
+  Future<void> signUpWithEmail(String email, String password, String name) async {
     try {
       isLoading.value = true;
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      await _auth.currentUser?.updateDisplayName(fullName);
-      
       Get.snackbar(
         'Success', 
-        'Signup successful!',
-        snackPosition: SnackPosition.BOTTOM,
-        duration: const Duration(seconds: 2),
+        'Account created successfully!',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.green.withOpacity(0.1),
+        colorText: Colors.green,
+        duration: const Duration(seconds: 3),
       );
-      
-      await Future.delayed(const Duration(seconds: 2));
-      Get.offAllNamed('/welcome');
+      await Future.delayed(const Duration(seconds: 1));
+      Get.offAllNamed('/dashboard');
     } catch (e) {
       Get.snackbar(
         'Error', 
         e.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-        duration: const Duration(seconds: 3),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red.withOpacity(0.1),
+        colorText: Colors.red,
       );
     } finally {
       isLoading.value = false;

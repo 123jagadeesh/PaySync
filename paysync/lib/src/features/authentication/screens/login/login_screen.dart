@@ -3,9 +3,40 @@ import 'package:get/get.dart';
 import 'package:paysync/src/constants/colors.dart';
 import 'package:paysync/src/constants/sizes.dart';
 import 'package:paysync/src/constants/text_strings.dart';
+import 'package:paysync/src/features/authentication/controllers/auth_controller.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _authController = Get.find<AuthController>();
+  bool _isPasswordVisible = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  // Remove the duplicate _handleLogin at the bottom of the file and keep this one at the top
+  void _handleLogin() {
+    if (_formKey.currentState!.validate()) {
+      final email = _emailController.text.trim();
+      final password = _passwordController.text;
+      _authController.loginWithEmail(email, password).then((_) {
+        // Navigate to dashboard after successful login
+        Get.offAllNamed('/dashboard');
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +72,15 @@ class LoginScreen extends StatelessWidget {
                 
                 // Section 2 - Form
                 Form(
+                  key: _formKey,
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextFormField(
+                          controller: _emailController,
+                          validator: (value) => value!.isEmpty ? 'Please enter your email' : null,
                           decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.person_outline_outlined),
                             labelText: "Email",
@@ -56,14 +90,23 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 20.0),
                         TextFormField(
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.fingerprint),
+                          controller: _passwordController,
+                          obscureText: !_isPasswordVisible,
+                          validator: (value) => value!.isEmpty ? 'Please enter your password' : null,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.fingerprint),
                             labelText: "Password",
                             hintText: "Password",
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
                             suffixIcon: IconButton(
-                              onPressed: null,
-                              icon: Icon(Icons.remove_red_eye_sharp),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible = !_isPasswordVisible;
+                                });
+                              },
+                              icon: Icon(
+                                _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                              ),
                             ),
                           ),
                         ),
@@ -77,10 +120,16 @@ class LoginScreen extends StatelessWidget {
                         ),
                         SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text("LOGIN".toUpperCase()),
-                          ),
+                          child: Obx(() => ElevatedButton(
+                            onPressed: _authController.isLoading.value ? null : _handleLogin,
+                            child: _authController.isLoading.value
+                                ? const SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(color: Colors.white),
+                                  )
+                                : Text("LOGIN".toUpperCase()),
+                          )),
                         ),
                       ],
                     ),

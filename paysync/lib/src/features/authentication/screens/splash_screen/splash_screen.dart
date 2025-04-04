@@ -8,19 +8,22 @@ import 'package:paysync/src/constants/text_strings.dart';
 import 'package:paysync/src/features/authentication/controllers/splash_screen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
-    SplashScreen ({super.key});
-  
-    final splashController = Get.put(SplashScreenController());
-    @override
+  const SplashScreen({super.key});
+
+  @override
   Widget build(BuildContext context) {
+    final splashController = Get.put(SplashScreenController());
+    
     var mediaQuery = MediaQuery.of(context);
     var height = mediaQuery.size.height;
     var width = mediaQuery.size.width;
     var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
+    
     splashController.startAnimation();
+    
     return Scaffold(
-     backgroundColor: isDarkMode ? tSecondaryColor : tPrimaryColor, // Add background color
+      backgroundColor: isDarkMode ? tSecondaryColor : tPrimaryColor,
       body: Stack(
         children: [
           Obx( ()=>AnimatedPositioned(

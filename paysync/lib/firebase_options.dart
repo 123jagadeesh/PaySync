@@ -57,19 +57,20 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBHbZuZ8rISLE6MgzeIm7tLavjAy-1evTQ',
-    appId: '1:133788893267:android:ec2fe672b92136de0b06a6',
-    messagingSenderId: '133788893267',
-    projectId: 'paysync-329b1',
-    storageBucket: 'paysync-329b1.firebasestorage.app',
+    apiKey: 'AIzaSyCDBsiNBZATxIBkfipLQZ3v02Lzy9lhQP8',
+    appId: '1:373674165454:android:6c4583049f7d69ed61fc9f',
+    messagingSenderId: '373674165454',
+    projectId: 'paysync-58239',
+    storageBucket: 'paysync-58239.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBLbWzPSXrplMfZax0swPdvx87jmUcIhp8',
-    appId: '1:133788893267:ios:8cc628350f4c1ea80b06a6',
-    messagingSenderId: '133788893267',
-    projectId: 'paysync-329b1',
-    storageBucket: 'paysync-329b1.firebasestorage.app',
+    apiKey: 'AIzaSyC7-A6irVUgo9bRrUxg6-wVy8NsxAbiPaU',
+    appId: '1:373674165454:ios:5e14afa555a98c3361fc9f',
+    messagingSenderId: '373674165454',
+    projectId: 'paysync-58239',
+    storageBucket: 'paysync-58239.firebasestorage.app',
     iosBundleId: 'com.example.paysync',
   );
+
 }

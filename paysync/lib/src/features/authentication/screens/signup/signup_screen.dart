@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:paysync/src/constants/colors.dart';
+// import 'package:paysync/src/constants/colors.dart';
 import 'package:paysync/src/constants/sizes.dart';
-import 'package:paysync/src/constants/text_strings.dart';
+// import 'package:paysync/src/constants/text_strings.dart';
 import 'package:paysync/src/features/authentication/controllers/auth_controller.dart';
 
 class SignUpScreen extends StatefulWidget {

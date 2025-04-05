@@ -1,3 +1,30 @@
+# --- BACKEND (Java / Spring Boot / Maven) ---
+/backend/target/
+/backend/.mvn/
+/backend/mvnw
+/backend/mvnw.cmd
+*.jar
+*.war
+*.log
+
+# Firebase secret key
+/backend/src/main/resources/firebase/*.json
+
+# --- FRONTEND (Flutter) ---
+/paysync/build/
+/paysync/.dart_tool/
+/paysync/.idea/
+/paysync/.packages
+/paysync/pubspec.lock
+
+# Firebase Dart config (auto-generated)
+**/firebase_options.dart
+
+# --- Common IDE configs ---
+.vscode/
+.idea/
+*.iml
+
 # Miscellaneous
 *.class
 *.log

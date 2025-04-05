@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:paysync/src/constants/colors.dart';
 import 'package:paysync/src/constants/sizes.dart';
-import 'package:paysync/src/constants/text_strings.dart';
 import 'package:paysync/src/features/authentication/controllers/auth_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -32,8 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final email = _emailController.text.trim();
       final password = _passwordController.text;
       _authController.loginWithEmail(email, password).then((_) {
-        // Navigate to dashboard after successful login
-        Get.offAllNamed('/dashboard');
+        
       });
     }
   }

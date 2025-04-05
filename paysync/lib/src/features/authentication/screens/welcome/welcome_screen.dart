@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:paysync/src/constants/colors.dart';
 import 'package:paysync/src/constants/image_strings.dart';
 import 'package:paysync/src/constants/sizes.dart';
@@ -10,50 +11,44 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
-    var height=mediaQuery.size.height;
-    var brightness=mediaQuery.platformBrightness;
+    var height = mediaQuery.size.height;
+    var brightness = mediaQuery.platformBrightness;
     final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: isDarkMode ? tSecondaryColor: tPrimaryColor,
-       body: Container(
-            padding: EdgeInsets.all(tDefaultSize),
-            child: Column(
-                 mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
-                 children: [
-                    Image (image: AssetImage(tSplashImage),height: height*0.5), 
-                    Column(
-                      children: [
-                         Text (tAppTagLine,
-                                style: Theme.of(context).textTheme.headlineLarge,
-                                textAlign: TextAlign.center
-                                ),
-                         ],
-                          ), // Column
-                    Row(
-                      children: [
-                        Expanded(
-                          child:OutlinedButton (
-                            onPressed: (){}, 
-                            child: Text(tLogin.toUpperCase()),
-                            ),
-                            ),   
-                        const SizedBox(
-                          width: 10.0,
-                          ),
-                        Expanded(
-                          child:OutlinedButton (
-                            onPressed: (){}, 
-                            child: Text(tSignup.toUpperCase()),
-                            ),
-                            ), 
-                      ]
-                             ) ,// Row
-                    ],
+      backgroundColor: isDarkMode ? tSecondaryColor : tPrimaryColor,
+      body: Container(
+        padding: EdgeInsets.all(tDefaultSize),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image(image: AssetImage(tSplashImage), height: height * 0.5),
+            Column(
+              children: [
+                Text(tAppTagLine,
+                    style: Theme.of(context).textTheme.headlineLarge,
+                    textAlign: TextAlign.center),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Get.toNamed('/login'),
+                    child: Text(tLogin.toUpperCase()),
+                  ),
                 ),
-
-// Column
-    ),
+                const SizedBox(width: 10.0),
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Get.toNamed('/signup'),
+                    child: Text(tSignup.toUpperCase()),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
-
   }
 }

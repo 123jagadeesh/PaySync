@@ -1,0 +1,2 @@
+rootProject.name = 'paysync_android'
+include ':app'

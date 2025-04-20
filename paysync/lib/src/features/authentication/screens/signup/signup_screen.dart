@@ -133,6 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         _emailController.text.trim(),
                                         _passwordController.text,
                                         _nameController.text.trim(),
+                                         _phoneController.text.trim(),
                                       );
                                     }
                                   },
